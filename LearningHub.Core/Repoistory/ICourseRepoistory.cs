@@ -11,7 +11,7 @@ namespace LearningHub.Core.Repoistory
     {
 
         List<Course> GetAllCourses();
-        Course GetByCourseId(int id);
+        Course GetCourseById(int id);
         void CreateCourse(Course course);
         void UpdateCourse(Course course);
         void DeleteCourse(int id);

@@ -66,7 +66,7 @@ namespace LearningHub.Infra.Repoistory
 
 
 
-        public Course GetByCourseId(int id)
+        public Course GetCourseById(int id)
         {
             var p = new DynamicParameters();
             p.Add("id", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
