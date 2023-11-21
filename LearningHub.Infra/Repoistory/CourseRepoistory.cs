@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using LearningHub.Core.Common;
 using LearningHub.Core.Data;
+using LearningHub.Core.DTO;
 using LearningHub.Core.Repoistory;
 using System;
 using System.Collections.Generic;
@@ -76,10 +77,26 @@ namespace LearningHub.Infra.Repoistory
 
 
 
+        public List<UserDTO> getuserRole()
+        {
+            var result = dbContext.Connection.Query<UserDTO>("Course_Package.getusernamerolename", commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
 
+      
 
+        public List<Search> filter(Search search)
+        {
+            var p = new DynamicParameters();
+            p.Add("cName", search.Coursename, DbType.String, ParameterDirection.Input);
+            p.Add("sName", search.Firstname, DbType.String, ParameterDirection.Input);
+            p.Add("DateFrom", search.DateFrom, DbType.Date, ParameterDirection.Input);
+            p.Add("DateTo", search.DateTo, DbType.Date, ParameterDirection.Input);
 
-
+            var result = dbContext.Connection.Query<Search>("stdcourse_Package.SearchStudentAndCourse",
+                p, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
 
 
 

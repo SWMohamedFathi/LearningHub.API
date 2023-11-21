@@ -1,4 +1,5 @@
 ﻿using LearningHub.Core.Data;
+using LearningHub.Core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,9 @@ namespace LearningHub.Core.Service
         void DeleteCourse(int id);
         public void UpdateCourse(Course course);
         Course GetCourseById(int id);
+        public List<UserDTO> getuserRole();
+        public List<Search> filter(Search search);
+
 
     }
 }

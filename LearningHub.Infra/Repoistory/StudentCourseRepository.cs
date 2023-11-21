@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using LearningHub.Core.Common;
 using LearningHub.Core.Data;
+using LearningHub.Core.DTO;
 using LearningHub.Core.Repoistory;
 using System;
 using System.Collections.Generic;
@@ -67,6 +68,11 @@ namespace LearningHub.Infra.Repoistory
             var result = dbContext.Connection.ExecuteAsync("stdcourse_Package.UpdateStdCourse", p, commandType: CommandType.StoredProcedure);
         }
 
+        public List<TotalStudents> TotalStudentInEachCourse()
+        {
+            var result = dbContext.Connection.Query<TotalStudents>("stdcourse_Package.TotalStudentInEachCourse", commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
 
 
     }

@@ -1,4 +1,5 @@
 ﻿using LearningHub.Core.Data;
+using LearningHub.Core.DTO;
 using LearningHub.Core.Repoistory;
 using LearningHub.Core.Service;
 using LearningHub.Infra.Repoistory;
@@ -43,6 +44,11 @@ namespace LearningHub.Infra.Service
         public Stdcourse GetStudentCourseById(int id)
         {
             return _studentCourseRepoistory.GetStudentCourseById(id);
+        }
+
+        public List<TotalStudents> TotalStudentInEachCourse()
+        {
+            return _studentCourseRepoistory.TotalStudentInEachCourse();
         }
 
 

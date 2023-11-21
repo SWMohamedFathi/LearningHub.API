@@ -1,5 +1,6 @@
 ﻿using LearningHub.Core.Data;
 using LearningHub.Core.Service;
+using LearningHub.Infra.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,55 +14,50 @@ namespace LearningHub.API.Controllers
 
         public CategoryController(ICategoryService categoryService)
         {
-            _categoryService = categoryService;
+            this._categoryService = categoryService;
         }
-
 
 
         [HttpGet]
         [Route("GetAllCategories")]
-
         public List<Category> GetAllCategories()
-
         {
-            return _categoryService.GetAllCategories();
+            return _categoryService.GetAllCategories();        
         }
-
 
         [HttpGet]
         [Route("GetCategoryById/{id}")]
-        public void GetCategoryById(int id)
-
+        public Category GetCategoryById(int id)
         {
-            _categoryService.GetCategoryById(id);
+            return _categoryService.GetCategoryById(id);
         }
 
 
         [HttpPost]
         [Route("CreateCategory")]
-        public void CreateCategory(Category category)
-        {
-        
-            _categoryService.CreateCategory(category);
 
+        public void CreateCategory(Category category) 
+        { 
+                _categoryService.CreateCategory(category);
         }
 
 
         [HttpPut]
         [Route("UpdateCategory")]
 
-       public void UpdateCategory(Category category)
+        public void UpdateCategory(Category category)
         {
             _categoryService.UpdateCategory(category);
         }
 
-
         [HttpDelete]
         [Route("DeleteCategory/{id}")]
-       public void DeleteCategory(int categoryId)
+
+        public void DeleteCategory(int id)
         {
-            _categoryService.DeleteCategory(categoryId);
+            _categoryService.DeleteCategory(id);
         }
+
 
     }
 }

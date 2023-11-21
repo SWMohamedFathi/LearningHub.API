@@ -1,10 +1,12 @@
 ﻿using LearningHub.Core.Data;
+using LearningHub.Core.DTO;
 using LearningHub.Core.Repoistory;
 using LearningHub.Core.Service;
 using LearningHub.Infra.Repoistory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -46,8 +48,15 @@ namespace LearningHub.Infra.Service
             return CourseRepoistory.GetCourseById(id);
         }
 
+        public List<UserDTO>getuserRole()
+        {
+           return  CourseRepoistory.getuserRole();
+        }
 
-
+        public List<Search> filter(Search search)
+        {
+            return CourseRepoistory.filter(search);
+        }
 
     }
 }

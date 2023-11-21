@@ -19,4 +19,8 @@
     <ProjectReference Include="..\LearningHub.Infra\LearningHub.Infra.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
+
 </Project>

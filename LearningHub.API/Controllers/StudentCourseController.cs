@@ -1,4 +1,5 @@
 ﻿using LearningHub.Core.Data;
+using LearningHub.Core.DTO;
 using LearningHub.Core.Service;
 using LearningHub.Infra.Service;
 using Microsoft.AspNetCore.Http;
@@ -53,6 +54,13 @@ namespace LearningHub.API.Controllers
         public void DeleteStudentCourse(int id)
         {
             _studentCourseService.DeleteStudentCourse(id);
+        }
+
+        [HttpGet]
+        [Route("TotalStudentInEachCourse")]
+        public List<TotalStudents> TotalStudentInEachCourse()
+        {
+            return _studentCourseService.TotalStudentInEachCourse();
         }
 
     }

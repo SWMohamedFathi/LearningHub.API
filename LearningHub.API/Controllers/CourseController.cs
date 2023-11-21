@@ -1,4 +1,5 @@
 ﻿using LearningHub.Core.Data;
+using LearningHub.Core.DTO;
 using LearningHub.Core.Service;
 using LearningHub.Infra.Service;
 using Microsoft.AspNetCore.Http;
@@ -55,6 +56,35 @@ namespace LearningHub.API.Controllers
         {
             courseService.DeleteCourse(id);
         }
+        [HttpPost]
 
+        [Route("uploadImage")]
+        public Course UploadIMage()
+        {
+            var file = Request.Form.Files[0];
+            var fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+            var fullPath = Path.Combine("Images", fileName);
+            using (var stream = new FileStream(fullPath, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+            Course item = new Course();
+            item.Imagename = fileName;
+            return item;
+        }
+        [HttpGet]
+        [Route("getuserRole")]
+
+        public List<UserDTO> getuserRole()
+        {
+            return courseService.getuserRole();
+        }
+
+        [HttpPost]
+        [Route("filter")]
+        public List<Search> filter(Search search)
+        {
+            return courseService.filter(search);
+        }
     }
 }
