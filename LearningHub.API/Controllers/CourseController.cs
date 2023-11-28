@@ -86,5 +86,17 @@ namespace LearningHub.API.Controllers
         {
             return courseService.filter(search);
         }
+
+
+        [HttpGet]
+        [Route("getallcategory")]
+        [HttpGet]
+        [Route("GetAllCategoryCourse")]
+        public Task<List<Category>> GetAllCategoryCourse()
+        {
+            return courseService.GetAllCategoryCourse();
+
+        }
+
     }
 }

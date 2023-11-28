@@ -17,6 +17,7 @@ namespace LearningHub.Core.Service
         Course GetCourseById(int id);
         public List<UserDTO> getuserRole();
         public List<Search> filter(Search search);
+        Task<List<Category>> GetAllCategoryCourse();
 
 
     }

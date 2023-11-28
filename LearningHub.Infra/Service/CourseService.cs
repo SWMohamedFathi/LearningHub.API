@@ -58,5 +58,11 @@ namespace LearningHub.Infra.Service
             return CourseRepoistory.filter(search);
         }
 
+        public Task<List<Category>> GetAllCategoryCourse()
+        {
+            return CourseRepoistory.GetAllCategoryCourse();
+        }
+
+
     }
 }

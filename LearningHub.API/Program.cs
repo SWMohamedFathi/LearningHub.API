@@ -4,6 +4,9 @@ using LearningHub.Core.Service;
 using LearningHub.Infra.Common;
 using LearningHub.Infra.Repoistory;
 using LearningHub.Infra.Service;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +27,27 @@ builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<IStudentCourseService, StudentCourseService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 
+
+
+
+builder.Services.AddAuthentication(opt => {
+opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+   .AddJwtBearer(options =>
+   {
+   options.TokenValidationParameters = new TokenValidationParameters
+   {
+       ValidateIssuer = true,
+       ValidateAudience = true,
+       ValidateLifetime = true,
+       ValidateIssuerSigningKey = true,
+       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
+   };
+   });
 
 
 
@@ -44,3 +67,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+app.UseAuthentication();

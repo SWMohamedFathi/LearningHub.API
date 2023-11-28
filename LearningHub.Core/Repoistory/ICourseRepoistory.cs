@@ -21,6 +21,8 @@ namespace LearningHub.Core.Repoistory
         public List<Search> filter(Search search);
 
 
+        Task<List<Category>> GetAllCategoryCourse();
+
 
     }
 }

@@ -98,7 +98,50 @@ namespace LearningHub.Infra.Repoistory
             return result.ToList();
         }
 
+        public async Task<List<Category>> GetAllCategoryCourse()
+        {
 
+
+            var result1 = await dbContext.Connection.QueryAsync<Category, Course, Category>("Course_Package.GetAllCategoryCourse", (Category, course) =>
+            {
+                Category.Courses.Add(course);
+                return Category;
+            },
+          splitOn: "Courseid",
+            param: null,
+            commandType: CommandType.StoredProcedure
+
+            );
+            //result1 =
+            /*
+                  1 - Backend ==> 1 - C#
+                  1 - Backend ==> 2 - c++
+                  1 - Backend ==> 3 - API
+                  2 - FrontEnd ==> 5 - html
+                  2 - frontend ==> 4 - c++
+                  2 - frontend ==> 6 - API
+ 
+                 */
+            var results2 = result1.GroupBy(p => p.Categoryid).Select(g =>
+            {
+                var groupedPost = g.First();
+                groupedPost.Courses = g.Select(p => p.Courses.Single()).ToList();
+                return groupedPost;
+            });
+            return results2.ToList();
+            //result2 =
+            /*
+                  1 - Backend ==> 
+                    1 - C#
+                    2 - c++
+                    3 - API
+                  2 - FrontEnd ==> 
+                    5 - html
+                    4 - c++
+                    6 - API
+ 
+                 */
+        }
 
 
 
