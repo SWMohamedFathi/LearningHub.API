@@ -30,7 +30,14 @@ builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 
-
+builder.Services.AddCors(corsOptions =>
+{
+    corsOptions.AddPolicy("policy",
+    builder =>
+    {
+        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
 
 
 builder.Services.AddAuthentication(opt => {
@@ -63,7 +70,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
+app.UseCors("policy");
 app.MapControllers();
 
 app.Run();
